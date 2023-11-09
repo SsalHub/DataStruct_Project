@@ -2,16 +2,12 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"type": "cppbuild",
-			"label": "C/C++: gcc.exe build active file",
-			"command": "C:/MinGW/bin/gcc.exe",
+			"type": "shell",
+			"label": "[ Build with gcc ]",
+			"command": "mingw32-make",
 			"args": [
-				"-fdiagnostics-color=always",
-				"-g",
-				"${file}",
-				"-o",
-				"${fileDirname}\\${fileBasenameNoExtension}.exe",
-				""
+				"-C",
+				"${cwd}"
 			],
 			"options": {
 				"cwd": "C:/MinGW/bin"
@@ -21,6 +17,34 @@
 			],
 			"group": "build",
 			"detail": "compiler: C:/MinGW/bin/gcc.exe"
+		},
+		{
+			"type": "shell",
+			"label": "clean",
+			"linux": {
+				"command": "find",
+				"args": [
+					"${cwd}",
+					"-type",
+					"f",
+					"-name",
+					"*.o",
+					"-exec",
+					"rm",
+					"-f",
+					"{}",
+					"\\;"
+				]
+			},
+			"windows": {
+				"command": "del",
+				"args": [
+					"/s",
+					"/q",
+					"\"${cwd}\\*.o\""
+				]
+			},
+			"problemMatcher": []
 		}
 	]
 }

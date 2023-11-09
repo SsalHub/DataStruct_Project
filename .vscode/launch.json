@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "d:/programming/c/workspace/DataStruct_Project/DataStruct_Project",
-      "program": "d:/programming/c/workspace/DataStruct_Project/DataStruct_Project/build/Debug/outDebug",
+      "cwd": "d:/programming/c/workspace/DataStruct_Project/DataStruct_Project/source",
+      "program": "d:/programming/c/workspace/DataStruct_Project/DataStruct_Project/source/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
