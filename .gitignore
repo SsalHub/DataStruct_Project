@@ -1,6 +1,22 @@
 # Created by https://www.toptal.com/developers/gitignore/api/windows,visualstudio,c
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,visualstudio,c
 
+### CUSTOM AREA ###
+# JaeUk
+DataStructProject/
+DataStructProject.sln
+.vs/
+
+# SunHeok
+
+
+# JunSeo
+
+
+# JunSeong
+
+
+
 ### C ###
 # Prerequisites
 *.d
