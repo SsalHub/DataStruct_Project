@@ -2,7 +2,7 @@
 #define __BASEDATA__
 
 #define _SCREEN_WIDTH_	60
-#define _SCREEN_HEIGHT_	24	
+#define _SCREEN_HEIGHT_	24
 
 #define _CENTER_	0
 #define _LEFT_		1
