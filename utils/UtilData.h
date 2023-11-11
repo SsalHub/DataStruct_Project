@@ -2,6 +2,7 @@
 #define __UTILDATA__
 
 #include <stdio.h>
+
 #ifdef _WIN32
 #include <windows.h>
 #include <conio.h>
