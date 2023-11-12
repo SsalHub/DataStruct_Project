@@ -1,5 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include "Leaderboard.h"
+#include "leaderboard.h"
 
 void drawScoreboard() {
     

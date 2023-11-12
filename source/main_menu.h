@@ -1,7 +1,7 @@
 #ifndef __MAINMENU__
 #define __MAINMENU__
 
-#include "BaseData.h"
+#include "../utils/utility.h"
 
 #include <stdio.h>
 #include <string.h>
