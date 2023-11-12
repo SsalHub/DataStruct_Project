@@ -1,14 +1,11 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include "BaseData.h"
-#include "MainMenu.h"
-#include "Leaderboard.h"
-
+#include "main.h"
 
 int main(void) {
     initGame();
 
-    showMainMenu();
-    drawScoreboard();
+    //showMainMenu();
+    //drawScoreboard();
 
     return 0;
 }

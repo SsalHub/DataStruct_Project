@@ -1,5 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include "MainMenu.h"
+#include "main_menu.h"
 
 void showMainMenu()
 {

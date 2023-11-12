@@ -1,5 +1,5 @@
-#ifndef __BASEDATA__
-#define __BASEDATA__
+#ifndef __UTILDATA__
+#define __UTILDATA__
 
 #define _SCREEN_WIDTH_	60
 #define _SCREEN_HEIGHT_	24
@@ -10,11 +10,14 @@
 #define _UP_		3
 #define _DOWN_		4
 
-#include "../utils/UtilData.h"
 
+#include <stdio.h>
 #include <string.h>
+#include <windows.h>
+#include <conio.h>
 
 void initGame();
 void drawBorder();
+void gotoxy(int x, int y);
 
 #endif
