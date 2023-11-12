@@ -19,6 +19,6 @@ void showMainMenu()
     y = _SCREEN_HEIGHT_ * 0.5f;
     gotoxy(x, y);
     fprintf(stdout, "Press Any Key.\n");
-    while (!kbhit());
+    while (!_kbhit());
 
 }

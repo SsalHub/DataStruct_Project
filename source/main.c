@@ -8,7 +8,6 @@ int main(void) {
     initGame();
 
     showMainMenu();
-
     drawScoreboard();
 
     return 0;
