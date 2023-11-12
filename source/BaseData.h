@@ -16,6 +16,5 @@
 
 void initGame();
 void drawBorder();
-void gotoxy(char* s, int xAlign, int yAlign);
 
 #endif

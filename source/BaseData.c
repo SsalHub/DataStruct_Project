@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include "BaseData.h"
 
 void initGame()
@@ -33,48 +34,4 @@ void drawBorder()
 		fprintf(stdout, "#");
 	}
 	fprintf(stdout, "\n");
-}
-
-void gotoxy(char* s, int xAlign, int yAlign)
-{
-	int x, y;
-	switch (xAlign)
-	{
-		case _CENTER_:
-			x = (_SCREEN_WIDTH_ - strlen(s)) * 0.5f + 1;
-			break;
-
-		case _LEFT_:
-			x = 1;
-			break;
-
-		case _RIGHT_:
-			x = _SCREEN_WIDTH_ - 1;
-			break;
-
-		default:
-			x = 1;
-			break;
-	}
-
-	switch (yAlign)
-	{
-		case _CENTER_:
-			y = _SCREEN_HEIGHT_ * 0.5f;
-			break;
-
-		case _UP_:
-			y = 1;
-			break;
-
-		case _DOWN_:
-			y = _SCREEN_HEIGHT_ - 1;
-			break;
-
-		default:
-			y = 1;
-			break;
-	}
-
-	gotoxy(x, y);
 }
