@@ -1,4 +1,4 @@
-#include<stdio.h>
+#include "Leaderboard.h"
 
 void drawScoreboard() {
     
@@ -6,10 +6,4 @@ void drawScoreboard() {
     fprintf(stdout, "|           Á¡¼öÆÇ       |\n");
     fprintf(stdout, "+------------------------+\n");
     
-}
-
-int main(void) {
-    drawScoreboard();
-
-    return 0;
 }

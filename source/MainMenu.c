@@ -1,13 +1,5 @@
 #include "MainMenu.h"
 
-int main()
-{
-    initGame();
-    showMainMenu();
-
-    return 0;
-}
-
 void showMainMenu()
 {
     char buffer[64];
