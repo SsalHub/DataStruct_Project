@@ -8,17 +8,13 @@ void showMainMenu()
 
     strcpy(buffer, "Main Menu");
     len = strlen(buffer);
-    x = (_SCREEN_WIDTH_ - len) * 0.5f + 1;
-    y = _SCREEN_HEIGHT_ * 0.5f;
-    gotoxy(x, y);
+    gotoxyDetailed(_ALIGN_CENTER_, _ALIGN_CENTER_, len);
     fprintf(stdout, "%s\n", buffer);
 
     strcpy(buffer, "Press Any Key.");
     len = strlen(buffer);
-    x = (_SCREEN_WIDTH_ - len) * 0.5f + 1;
-    y = _SCREEN_HEIGHT_ * 0.5f;
-    gotoxy(x, y);
-    fprintf(stdout, "Press Any Key.\n");
+    gotoxyDetailed(_ALIGN_CENTER_, _ALIGN_BOTTOM_, len);
+    fprintf(stdout, "%s\n", buffer);
     while (!_kbhit());
 
 }
