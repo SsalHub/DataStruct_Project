@@ -4,8 +4,8 @@
 int main(void) {
     initGame();
 
-    //showMainMenu();
-    //drawScoreboard();
+    showMainMenu();
+    drawScoreboard();
 
     return 0;
 }
