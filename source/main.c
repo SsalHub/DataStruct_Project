@@ -7,5 +7,7 @@ int main(void) {
     showMainMenu();
     drawScoreboard();
 
+    printf("HEllo");
+
     return 0;
 }
