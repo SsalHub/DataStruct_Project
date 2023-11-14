@@ -2,9 +2,12 @@
 #include "leaderboard.h"
 
 void drawScoreboard() {
-    
+    clearScreen();
+    gotoxy(19, 1);
     fprintf(stdout, "+------------------------+\n");
-    fprintf(stdout, "|           점수판       |\n");
+    gotoxy(19, 2);
+    fprintf(stdout, "|          점수판        |\n");
+    gotoxy(19, 3);
     fprintf(stdout, "+------------------------+\n");
     
 }
