@@ -6,7 +6,7 @@ int main(void) {
 
     //JaeUk();
     //SunHeok();
-     JunSeo();
+    //JunSeo();
     JunSeong();
     
 
