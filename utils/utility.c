@@ -27,7 +27,7 @@ void gotoxyDetailed(int x, int y, int len)
 				break;
 
 			case _ALIGN_RIGHT_:
-				x = _SCREEN_WIDTH_ - 1;
+				x = _SCREEN_WIDTH_;
 				break;
 
 			default:
@@ -50,7 +50,7 @@ void gotoxyDetailed(int x, int y, int len)
 			break;
 
 		case _ALIGN_BOTTOM_:
-			y = _SCREEN_HEIGHT_ - 1;
+			y = _SCREEN_HEIGHT_;
 			break;
 
 		default:
@@ -108,14 +108,14 @@ void clearScreen()
 {
 	int i, j;
 	
-	gotoxy(0, 0);
-	for (j = 0; j < _SCREEN_HEIGHT_ + 2; j++)
+	gotoxy(1, 1);
+	for (j = 0; j < _SCREEN_HEIGHT_; j++)
 	{
-		for (i = 0; i < _SCREEN_WIDTH_ + 2; i++)
+		for (i = 0; i < _SCREEN_WIDTH_; i++)
 		{
 			fprintf(stdout, " ");
 		}
 		fprintf(stdout, "\n");
 	}
-	gotoxy(0, 0);
+	gotoxy(1, 1);
 }

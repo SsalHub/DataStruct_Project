@@ -5,4 +5,9 @@
 #include "main_menu.h"
 #include "leaderboard.h"
 
+void JaeUk();
+void SunHeok();
+void JunSeong();
+void JunSeo();
+
 #endif
