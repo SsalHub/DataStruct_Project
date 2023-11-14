@@ -108,14 +108,12 @@ void clearScreen()
 {
 	int i, j;
 	
-	gotoxy(1, 1);
-	for (j = 0; j < _SCREEN_HEIGHT_; j++)
+	for (j = 1; j <= _SCREEN_HEIGHT_; j++)
 	{
+		gotoxy(1, j);
 		for (i = 0; i < _SCREEN_WIDTH_; i++)
 		{
 			fprintf(stdout, " ");
 		}
-		fprintf(stdout, "\n");
 	}
-	gotoxy(1, 1);
 }
