@@ -23,8 +23,6 @@ typedef enum ScreenAlign
 
 
 /* pure utility func */
-void gotoxy(int x, int y);
-void printString(char *s, int x, int y);
 int convertXPos(int x, int len);
 int convertYPos(int y, int height);
 int getStringHeight(char *s);
@@ -34,6 +32,8 @@ int getStringHeight(char *s);
 void initGame();
 void drawBorder();
 void clearScreen();
+void gotoxy(int x, int y);
+void printString(char *s, int x, int y);
 
 
 #endif

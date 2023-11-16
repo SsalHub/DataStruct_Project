@@ -4,54 +4,6 @@
 
 
 /* pure utility func */
-void gotoxy(int x, int y)
-{
-	int convertX, convertY;
-	convertX = convertXPos(x, 0);
-	convertY = convertYPos(y, 0);
-
-	if ((convertX < 1 || _SCREEN_WIDTH_ < convertX) || (convertY < 1 || _SCREEN_HEIGHT_ < convertY))
-	{
-		/* error */
-		fprintf(stdout, "Error Occurred!\nx value in gotoxy(%d, %d) func is invalid.\n", x, y);
-		exit(1);
-	}
-
-	COORD pos = { x, y };
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
-}
-
-void printString(char *s, int x, int y)
-{
-	char *token;
-	int len, height, centerX, beginX;
-
-	/* First Line */
-	token = strtok(s, "\n");
-	len = strlen(token);
-	height = getStringHeight(s);
-
-	x = convertXPos(x, len);
-	y = convertYPos(y, height);
-	centerX = x + (len * 0.5f);
-
-	gotoxy(x, y++);
-	fprintf(stdout, "%s\n", token);
-
-	/* Second Line ~ Last Line */
-	token = strtok(s, NULL);
-	while (*token != '\0')
-	{
-		len = strlen(token);
-		beginX = centerX - (len * 0.5f);
-		/* break : error 발생, 문자열이 게임 테두리선을 넘어감 */ 
-		if (beginX < 1) break;
-		gotoxy(beginX, y++);
-		fprintf(stdout, "%s\n", token);
-		token = strtok(s, NULL);
-	}
-}
-
 int convertXPos(int x, int len)
 {
 	if (x < 1)
@@ -184,5 +136,56 @@ void clearScreen()
 		{
 			fprintf(stdout, " ");
 		}
+	}
+}
+
+void gotoxy(int x, int y)
+{
+	int convertX, convertY;
+	convertX = convertXPos(x, 0);
+	convertY = convertYPos(y, 0);
+
+	if ((convertX < 1 || _SCREEN_WIDTH_ < convertX) || (convertY < 1 || _SCREEN_HEIGHT_ < convertY))
+	{
+		/* error */
+		fprintf(stdout, "Error Occurred!\nx value in gotoxy(%d, %d) func is invalid.\n", x, y);
+		exit(1);
+	}
+
+	COORD pos = { x, y };
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
+}
+
+void printString(char *s, int x, int y)
+{
+	char *token;
+	int len, height, centerX, beginX, endX;
+
+	/* First Line */
+	token = strtok(s, "\n");
+	len = strlen(token);
+	height = getStringHeight(s);
+
+	beginX = convertXPos(x, len);
+	endX = beginX + len;
+
+	y = convertYPos(y, height);
+	centerX = beginX + (len * 0.5f);
+
+	gotoxy(beginX, y++);
+	fprintf(stdout, "%s\n", token);
+
+	/* Second Line ~ Last Line */
+	token = strtok(NULL, "\n");
+	if (token == NULL) return;	// There is no second line 
+	while (token != NULL)
+	{
+		len = strlen(token);
+		beginX = centerX - (len * 0.5f);
+		/* continue : error 발생, 문자열이 게임 테두리선을 넘어감 */ 
+		if (beginX < 1) continue;
+		gotoxy(beginX, y++);
+		fprintf(stdout, "%s\n", token);
+		token = strtok(NULL, "\n");
 	}
 }
