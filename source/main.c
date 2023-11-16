@@ -5,7 +5,7 @@ int main(void) {
     initGame();
 
     //JaeUk();
-    SunHeok();
+    //SunHeok();
     //JunSeong();
     //JunSeo();
 
@@ -32,6 +32,5 @@ void JunSeong()
 void JunSeo()
 {
     /* 최준서 전용 */
-
     showMainMenu();
 }

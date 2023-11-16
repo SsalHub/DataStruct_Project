@@ -12,4 +12,9 @@ void SunHeok();
 void JunSeong();
 void JunSeo();
 
+void JaeUk();
+void SunHeok();
+void JunSeong();
+void JunSeo();
+
 #endif

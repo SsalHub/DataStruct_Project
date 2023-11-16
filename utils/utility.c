@@ -27,7 +27,7 @@ void gotoxyDetailed(int x, int y, int len)
 				break;
 
 			case _ALIGN_RIGHT_:
-				x = _SCREEN_WIDTH_ - 1;
+				x = _SCREEN_WIDTH_;
 				break;
 
 			default:
@@ -50,7 +50,7 @@ void gotoxyDetailed(int x, int y, int len)
 			break;
 
 		case _ALIGN_BOTTOM_:
-			y = _SCREEN_HEIGHT_ - 1;
+			y = _SCREEN_HEIGHT_;
 			break;
 
 		default:
@@ -107,7 +107,6 @@ void drawBorder()
 void clearScreen()
 {
 	int i, j;
-
 	for (j = 1; j <= _SCREEN_HEIGHT_; j++)
 	{
 		gotoxy(1, j);
