@@ -3,66 +3,134 @@
 
 
 
-
 /* pure utility func */
 void gotoxy(int x, int y)
 {
+	int convertX, convertY;
+	convertX = convertXPos(x, 0);
+	convertY = convertYPos(y, 0);
+
+	if ((convertX < 1 || _SCREEN_WIDTH_ < convertX) || (convertY < 1 || _SCREEN_HEIGHT_ < convertY))
+	{
+		/* error */
+		fprintf(stdout, "Error Occurred!\nx value in gotoxy(%d, %d) func is invalid.\n", x, y);
+		exit(1);
+	}
+
 	COORD pos = { x, y };
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 }
 
-void gotoxyDetailed(int x, int y, int len)
+void printString(char *s, int x, int y)
 {
-	/* ÁÂÇ¥ ´ë½Å Align °ªÀ» ÀÔ·ÂÇÑ °æ¿ì */
+	char *token;
+	int len, height, centerX, beginX;
+
+	/* First Line */
+	token = strtok(s, "\n");
+	len = strlen(token);
+	height = getStringHeight(s);
+	x = convertXPos(x, len);
+	y = convertYPos(y, height);
+	centerX = x + (len * 0.5f);
+
+	gotoxy(x, y++);
+	fprintf(stdout, "%s\n", token);
+
+	/* Second Line ~ Last Line */
+	token = strtok(s, NULL);
+	while (*token != '\0')
+	{
+		len = strlen(token);
+		beginX = centerX - (len * 0.5f);
+		/* break : error ë°œìƒ, ë¬¸ìžì—´ì´ ê²Œìž„ í…Œë‘ë¦¬ì„ ì„ ë„˜ì–´ê° */ 
+		if (beginX < 1) break;
+		gotoxy(beginX, y++);
+		fprintf(stdout, "%s\n", token);
+		token = strtok(s, NULL);
+	}
+}
+
+int convertXPos(int x, int len)
+{
 	if (x < 1)
 	{
 		switch (x)
 		{
-			case _ALIGN_CENTER_:
+			case _X_CENTER_:
 				x = (_SCREEN_WIDTH_ - len) * 0.5f + 1;
 				break;
 
-			case _ALIGN_LEFT_:
+			case _X_LEFT_:
 				x = 1;
 				break;
 
-			case _ALIGN_RIGHT_:
+			case _X_RIGHT_:
 				x = _SCREEN_WIDTH_;
 				break;
 
 			default:
 				/* error */
-				fprintf(stdout, "Error Occurred!\nx value in gotoxyWithLen(%d, %d, %d) func is invalid.\n", x, y, len);
+				fprintf(stdout, "Error Occurred!\nx value in convertXPos(%d, %d) func is invalid.\n", x, len);
 				exit(1);
 				break;
 		}
 	}
+	if (_SCREEN_WIDTH_ < x) 
+	{
+		/* error */
+		fprintf(stdout, "Error Occurred!\nx value in convertXPos(%d, %d) func is invalid.\n", x, len);
+		exit(1);
+	}
+	return x;
+}
+
+int convertYPos(int y, int height)
+{
 	if (y < 1)
 	{
 		switch (y)
 		{
-		case _ALIGN_CENTER_:
-			y = _SCREEN_HEIGHT_ * 0.5f;
+		case _Y_CENTER_:
+			y = (_SCREEN_HEIGHT_ - height) * 0.5f + 1;
 			break;
 
-		case _ALIGN_TOP_:
+		case _Y_TOP_:
 			y = 1;
 			break;
 
-		case _ALIGN_BOTTOM_:
+		case _Y_BOTTOM_:
 			y = _SCREEN_HEIGHT_;
 			break;
 
 		default:
 			/* error */
-			fprintf(stdout, "Error Occurred!\ny value in gotoxyWithLen(%d, %d, %d) func is invalid.\n", x, y, len);
+			fprintf(stdout, "Error Occurred!\ny value in convertYPos(%d, %d) func is invalid.\n", y, height);
 			exit(1);
 			break;
 		}
 	}
+	if (_SCREEN_HEIGHT_ < y) 
+	{
+		/* error */
+		fprintf(stdout, "Error Occurred!\ny value in convertYPos(%d, %d) func is invalid.\n", y, height);
+		exit(1);
+	}
+	return y;
+}
 
-    COORD pos = { x, y };
-    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
+int getStringHeight(char *s)
+{
+	char *p;
+	int count = 0;
+
+	p = s;
+	while (*p != '\0')
+	{
+		if (*p == '\n') count++;
+		p++;
+	}
+	return count;
 }
 
 

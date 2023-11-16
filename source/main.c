@@ -4,7 +4,7 @@
 int main(void) {
     initGame();
 
-    //JaeUk();
+    JaeUk();
     //SunHeok();
     //JunSeong();
     //JunSeo();
@@ -16,6 +16,7 @@ void JaeUk()
 {
     /* 송재욱 전용 */
 
+    printString("Hello\nHow Are You\nIm Fine\nThankYou\n", _X_LEFT_, _Y_TOP_);
 }
 
 void SunHeok()
