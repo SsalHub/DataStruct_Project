@@ -4,10 +4,10 @@
 #define _SCREEN_WIDTH_	60
 #define _SCREEN_HEIGHT_	24
 
+
 #include <stdio.h>
 #include <string.h>
 #include <windows.h>
-#include <conio.h>
 
 
 typedef enum ScreenAlign
@@ -22,18 +22,34 @@ typedef enum ScreenAlign
 } ScreenAlign;
 
 
+
+
+
+
+/* utility func of this game */
+void gotoxy(int x, int y);
+void printString(char *s, int x, int y);
+void clearScreen();
+
+
+
+
+
+
+/* game initialization func*/
+void initGame();
+void drawBorder();
+
+
+
+
+
+
+
 /* pure utility func */
 int convertXPos(int x, int len);
 int convertYPos(int y, int height);
 int getStringHeight(char *s);
-
-
-/* utility func of this game */
-void initGame();
-void drawBorder();
-void clearScreen();
-void gotoxy(int x, int y);
-void printString(char *s, int x, int y);
 
 
 #endif

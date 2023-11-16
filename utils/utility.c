@@ -90,55 +90,6 @@ int getStringHeight(char *s)
 
 
 /* utility func of this game */
-void initGame()
-{
-	drawBorder();
-}
-
-void drawBorder()
-{
-	int i, j;
-
-	/* First Line*/
-	for (i = 0; i < _SCREEN_WIDTH_ + 2; i++)
-	{
-		fprintf(stdout, "#");
-	}
-	fprintf(stdout, "\n");
-
-	/* Middle Line */
-	for (j = 0; j < _SCREEN_HEIGHT_; j++)
-	{
-		fprintf(stdout, "#");
-		for (i = 0; i < _SCREEN_WIDTH_; i++)
-		{
-			fprintf(stdout, " ");
-		}
-		fprintf(stdout, "#\n");
-	}
-
-	/* Last Line */
-	for (i = 0; i < _SCREEN_WIDTH_ + 2; i++)
-	{
-		fprintf(stdout, "#");
-	}
-	fprintf(stdout, "\n");
-}
-
-void clearScreen()
-{
-	int i, j;
-	
-	for (j = 1; j <= _SCREEN_HEIGHT_; j++)
-	{
-		gotoxy(1, j);
-		for (i = 0; i < _SCREEN_WIDTH_; i++)
-		{
-			fprintf(stdout, " ");
-		}
-	}
-}
-
 void gotoxy(int x, int y)
 {
 	int convertX, convertY;
@@ -188,4 +139,53 @@ void printString(char *s, int x, int y)
 		fprintf(stdout, "%s\n", token);
 		token = strtok(NULL, "\n");
 	}
+}
+
+void clearScreen()
+{
+	int i, j;
+
+	for (j = 1; j <= _SCREEN_HEIGHT_; j++)
+	{
+		gotoxy(1, j);
+		for (i = 0; i < _SCREEN_WIDTH_; i++)
+		{
+			fprintf(stdout, " ");
+		}
+	}
+}
+
+void initGame()
+{
+	drawBorder();
+}
+
+void drawBorder()
+{
+	int i, j;
+
+	/* First Line*/
+	for (i = 0; i < _SCREEN_WIDTH_ + 2; i++)
+	{
+		fprintf(stdout, "#");
+	}
+	fprintf(stdout, "\n");
+
+	/* Middle Line */
+	for (j = 0; j < _SCREEN_HEIGHT_; j++)
+	{
+		fprintf(stdout, "#");
+		for (i = 0; i < _SCREEN_WIDTH_; i++)
+		{
+			fprintf(stdout, " ");
+		}
+		fprintf(stdout, "#\n");
+	}
+
+	/* Last Line */
+	for (i = 0; i < _SCREEN_WIDTH_ + 2; i++)
+	{
+		fprintf(stdout, "#");
+	}
+	fprintf(stdout, "\n");
 }
