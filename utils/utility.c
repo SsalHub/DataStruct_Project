@@ -122,7 +122,7 @@ int convertYPos(int y, int height)
 int getStringHeight(char *s)
 {
 	char *p;
-	int count = 0;
+	int count = 1;
 
 	p = s;
 	while (*p != '\0')
