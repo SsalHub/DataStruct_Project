@@ -13,9 +13,11 @@
 typedef enum ScreenAlign
 {
 	_ALIGN_NONE_ = -100,
+
 	_X_CENTER_,
 	_X_LEFT_,
 	_X_RIGHT_,
+
 	_Y_CENTER_,
 	_Y_TOP_,
 	_Y_BOTTOM_,
