@@ -7,7 +7,7 @@ int main(void) {
     JaeUk();
     //SunHeok();
     //JunSeong();
-    //JunSeo();
+    JunSeo();
 
     return 0;
 }
