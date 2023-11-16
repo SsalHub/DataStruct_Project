@@ -30,6 +30,7 @@ void printString(char *s, int x, int y)
 	token = strtok(s, "\n");
 	len = strlen(token);
 	height = getStringHeight(s);
+
 	x = convertXPos(x, len);
 	y = convertYPos(y, height);
 	centerX = x + (len * 0.5f);
