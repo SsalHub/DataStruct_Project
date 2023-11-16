@@ -7,14 +7,10 @@ void showMainMenu()
     int x, y, len;
 
     strcpy(buffer, "Main Menu");
-    len = strlen(buffer);
-    gotoxyDetailed(_ALIGN_CENTER_, _ALIGN_CENTER_, len);
-    fprintf(stdout, "%s\n", buffer);
+    printString(buffer, _X_CENTER_, _Y_CENTER_);
 
     strcpy(buffer, "Press Any Key.");
-    len = strlen(buffer);
-    gotoxyDetailed(_ALIGN_CENTER_, _ALIGN_BOTTOM_, len);
-    fprintf(stdout, "%s\n", buffer);
+    printString(buffer, _X_CENTER_, _Y_BOTTOM_);
     while (!_kbhit());
 
 }

@@ -4,7 +4,7 @@
 int main(void) {
     initGame();
 
-    //JaeUk();
+    JaeUk();
     //SunHeok();
     //JunSeong();
     //JunSeo();

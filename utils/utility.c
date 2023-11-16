@@ -3,72 +3,158 @@
 
 
 
-
 /* pure utility func */
-void gotoxy(int x, int y)
+int convertXPos(int x, int len)
 {
-	COORD pos = { x, y };
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
-}
-
-void gotoxyDetailed(int x, int y, int len)
-{
-	/* ÁÂÇ¥ ´ë½Å Align °ªÀ» ÀÔ·ÂÇÑ °æ¿ì */
 	if (x < 1)
 	{
 		switch (x)
 		{
-			case _ALIGN_CENTER_:
+			case _X_CENTER_:
 				x = (_SCREEN_WIDTH_ - len) * 0.5f + 1;
 				break;
 
-			case _ALIGN_LEFT_:
+			case _X_LEFT_:
 				x = 1;
 				break;
 
-			case _ALIGN_RIGHT_:
+			case _X_RIGHT_:
 				x = _SCREEN_WIDTH_;
 				break;
 
 			default:
 				/* error */
-				fprintf(stdout, "Error Occurred!\nx value in gotoxyWithLen(%d, %d, %d) func is invalid.\n", x, y, len);
+				fprintf(stdout, "Error Occurred!\nx value in convertXPos(%d, %d) func is invalid.\n", x, len);
 				exit(1);
 				break;
 		}
 	}
+	if (_SCREEN_WIDTH_ < x) 
+	{
+		/* error */
+		fprintf(stdout, "Error Occurred!\nx value in convertXPos(%d, %d) func is invalid.\n", x, len);
+		exit(1);
+	}
+	return x;
+}
+
+int convertYPos(int y, int height)
+{
 	if (y < 1)
 	{
 		switch (y)
 		{
-		case _ALIGN_CENTER_:
-			y = _SCREEN_HEIGHT_ * 0.5f;
+		case _Y_CENTER_:
+			y = (_SCREEN_HEIGHT_ - height) * 0.5f + 1;
 			break;
 
-		case _ALIGN_TOP_:
+		case _Y_TOP_:
 			y = 1;
 			break;
 
-		case _ALIGN_BOTTOM_:
+		case _Y_BOTTOM_:
 			y = _SCREEN_HEIGHT_;
 			break;
 
 		default:
 			/* error */
-			fprintf(stdout, "Error Occurred!\ny value in gotoxyWithLen(%d, %d, %d) func is invalid.\n", x, y, len);
+			fprintf(stdout, "Error Occurred!\ny value in convertYPos(%d, %d) func is invalid.\n", y, height);
 			exit(1);
 			break;
 		}
 	}
+	if (_SCREEN_HEIGHT_ < y) 
+	{
+		/* error */
+		fprintf(stdout, "Error Occurred!\ny value in convertYPos(%d, %d) func is invalid.\n", y, height);
+		exit(1);
+	}
+	return y;
+}
 
-    COORD pos = { x, y };
-    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
+int getStringHeight(char *s)
+{
+	char *p;
+	int count = 1;
+
+	p = s;
+	while (*p != '\0')
+	{
+		if (*p == '\n') count++;
+		p++;
+	}
+	return count;
 }
 
 
 
 
 /* utility func of this game */
+void gotoxy(int x, int y)
+{
+	int convertX, convertY;
+	convertX = convertXPos(x, 0);
+	convertY = convertYPos(y, 0);
+
+	if ((convertX < 1 || _SCREEN_WIDTH_ < convertX) || (convertY < 1 || _SCREEN_HEIGHT_ < convertY))
+	{
+		/* error */
+		fprintf(stdout, "Error Occurred!\nx value in gotoxy(%d, %d) func is invalid.\n", x, y);
+		exit(1);
+	}
+
+	COORD pos = { x, y };
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
+}
+
+void printString(char *s, int x, int y)
+{
+	char *token;
+	int len, height, centerX, beginX, endX;
+
+	/* First Line */
+	token = strtok(s, "\n");
+	len = strlen(token);
+	height = getStringHeight(s);
+
+	beginX = convertXPos(x, len);
+	endX = beginX + len;
+
+	y = convertYPos(y, height);
+	centerX = beginX + (len * 0.5f);
+
+	gotoxy(beginX, y++);
+	fprintf(stdout, "%s\n", token);
+
+	/* Second Line ~ Last Line */
+	token = strtok(NULL, "\n");
+	if (token == NULL) return;	// There is no second line 
+	while (token != NULL)
+	{
+		len = strlen(token);
+		beginX = centerX - (len * 0.5f);
+		/* continue : error ë°œìƒ, ë¬¸ìžì—´ì´ ê²Œìž„ í…Œë‘ë¦¬ì„ ì„ ë„˜ì–´ê° */ 
+		if (beginX < 1) continue;
+		gotoxy(beginX, y++);
+		fprintf(stdout, "%s\n", token);
+		token = strtok(NULL, "\n");
+	}
+}
+
+void clearScreen()
+{
+	int i, j;
+
+	for (j = 1; j <= _SCREEN_HEIGHT_; j++)
+	{
+		gotoxy(1, j);
+		for (i = 0; i < _SCREEN_WIDTH_; i++)
+		{
+			fprintf(stdout, " ");
+		}
+	}
+}
+
 void initGame()
 {
 	drawBorder();
@@ -102,17 +188,4 @@ void drawBorder()
 		fprintf(stdout, "#");
 	}
 	fprintf(stdout, "\n");
-}
-
-void clearScreen()
-{
-	int i, j;
-	for (j = 1; j <= _SCREEN_HEIGHT_; j++)
-	{
-		gotoxy(1, j);
-		for (i = 0; i < _SCREEN_WIDTH_; i++)
-		{
-			fprintf(stdout, " ");
-		}
-	}
 }
