@@ -5,7 +5,7 @@
 
 #include <stdio.h>
 #include <string.h>
-#include <conio.h>
+#include <windows.h>
 
 void showMainMenu();
 

@@ -107,15 +107,13 @@ void drawBorder()
 void clearScreen()
 {
 	int i, j;
-	
-	gotoxy(0, 0);
-	for (j = 0; j < _SCREEN_HEIGHT_ + 2; j++)
+
+	for (j = 1; j <= _SCREEN_HEIGHT_; j++)
 	{
-		for (i = 0; i < _SCREEN_WIDTH_ + 2; i++)
+		gotoxy(1, j);
+		for (i = 0; i < _SCREEN_WIDTH_; i++)
 		{
 			fprintf(stdout, " ");
 		}
-		fprintf(stdout, "\n");
 	}
-	gotoxy(0, 0);
 }

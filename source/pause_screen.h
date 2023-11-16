@@ -1,12 +1,15 @@
-#ifndef __LEADERBOARD__
-#define __LEADERBOARD__
+#ifndef __PAUSESCREEN__
+#define __PAUSESCREEN__
+
 
 #include "../utils/utility.h"
+#include "setting_screen.h"
 
 #include <stdio.h>
 #include <string.h>
 #include <windows.h>
 
-void drawScoreboard();
+
+void Pause();
 
 #endif
