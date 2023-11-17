@@ -3,6 +3,10 @@
 
 #define _SCREEN_WIDTH_	60
 #define _SCREEN_HEIGHT_	24
+#define _BORDER_LEFT_	0
+#define _BORDER_RIGHT_	_SCREEN_WIDTH_+2
+#define _BORDER_TOP_	0
+#define _BORDER_BOTTOM_	_SCREEN_HEIGHT_+2
 
 
 #include <stdio.h>
