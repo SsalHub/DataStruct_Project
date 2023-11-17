@@ -3,90 +3,6 @@
 
 
 
-/* pure utility func */
-int convertXPos(int x, int len)
-{
-	if (x < 1)
-	{
-		switch (x)
-		{
-			case _X_CENTER_:
-				x = (_SCREEN_WIDTH_ - len) * 0.5f + 1;
-				break;
-
-			case _X_LEFT_:
-				x = 1;
-				break;
-
-			case _X_RIGHT_:
-				x = _SCREEN_WIDTH_;
-				break;
-
-			default:
-				/* error */
-				fprintf(stdout, "Error Occurred!\nx value in convertXPos(%d, %d) func is invalid.\n", x, len);
-				exit(1);
-				break;
-		}
-	}
-	if (_SCREEN_WIDTH_ < x) 
-	{
-		/* error */
-		fprintf(stdout, "Error Occurred!\nx value in convertXPos(%d, %d) func is invalid.\n", x, len);
-		exit(1);
-	}
-	return x;
-}
-
-int convertYPos(int y, int height)
-{
-	if (y < 1)
-	{
-		switch (y)
-		{
-		case _Y_CENTER_:
-			y = (_SCREEN_HEIGHT_ - height) * 0.5f + 1;
-			break;
-
-		case _Y_TOP_:
-			y = 1;
-			break;
-
-		case _Y_BOTTOM_:
-			y = _SCREEN_HEIGHT_;
-			break;
-
-		default:
-			/* error */
-			fprintf(stdout, "Error Occurred!\ny value in convertYPos(%d, %d) func is invalid.\n", y, height);
-			exit(1);
-			break;
-		}
-	}
-	if (_SCREEN_HEIGHT_ < y) 
-	{
-		/* error */
-		fprintf(stdout, "Error Occurred!\ny value in convertYPos(%d, %d) func is invalid.\n", y, height);
-		exit(1);
-	}
-	return y;
-}
-
-int getStringHeight(char *s)
-{
-	char *p;
-	int count = 1;
-
-	p = s;
-	while (*p != '\0')
-	{
-		if (*p == '\n') count++;
-		p++;
-	}
-	return count;
-}
-
-
 
 
 /* utility func of this game */
@@ -155,6 +71,14 @@ void clearScreen()
 	}
 }
 
+
+
+
+
+
+
+
+/* game initialization func*/
 void initGame()
 {
 	drawBorder();
@@ -188,4 +112,94 @@ void drawBorder()
 		fprintf(stdout, "#");
 	}
 	fprintf(stdout, "\n");
+}
+
+
+
+
+
+
+
+
+/* pure utility func */
+int convertXPos(int x, int len)
+{
+	if (x < 1)
+	{
+		switch (x)
+		{
+		case _X_CENTER_:
+			x = (_SCREEN_WIDTH_ - len) * 0.5f + 1;
+			break;
+
+		case _X_LEFT_:
+			x = 1;
+			break;
+
+		case _X_RIGHT_:
+			x = _SCREEN_WIDTH_;
+			break;
+
+		default:
+			/* error */
+			fprintf(stdout, "Error Occurred!\nx value in convertXPos(%d, %d) func is invalid.\n", x, len);
+			exit(1);
+			break;
+		}
+	}
+	if (_SCREEN_WIDTH_ < x)
+	{
+		/* error */
+		fprintf(stdout, "Error Occurred!\nx value in convertXPos(%d, %d) func is invalid.\n", x, len);
+		exit(1);
+	}
+	return x;
+}
+
+int convertYPos(int y, int height)
+{
+	if (y < 1)
+	{
+		switch (y)
+		{
+		case _Y_CENTER_:
+			y = (_SCREEN_HEIGHT_ - height) * 0.5f + 1;
+			break;
+
+		case _Y_TOP_:
+			y = 1;
+			break;
+
+		case _Y_BOTTOM_:
+			y = _SCREEN_HEIGHT_;
+			break;
+
+		default:
+			/* error */
+			fprintf(stdout, "Error Occurred!\ny value in convertYPos(%d, %d) func is invalid.\n", y, height);
+			exit(1);
+			break;
+		}
+	}
+	if (_SCREEN_HEIGHT_ < y)
+	{
+		/* error */
+		fprintf(stdout, "Error Occurred!\ny value in convertYPos(%d, %d) func is invalid.\n", y, height);
+		exit(1);
+	}
+	return y;
+}
+
+int getStringHeight(char* s)
+{
+	char* p;
+	int count = 1;
+
+	p = s;
+	while (*p != '\0')
+	{
+		if (*p == '\n') count++;
+		p++;
+	}
+	return count;
 }
