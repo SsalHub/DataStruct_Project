@@ -36,6 +36,12 @@ void clearScreen();
 
 
 
+/* pure utility func */
+int convertXPos(int x, int len);
+int convertYPos(int y, int height);
+int getStringHeight(char *s);
+
+
 
 
 /* game initialization func*/
@@ -44,14 +50,6 @@ void drawBorder();
 
 
 
-
-
-
-
-/* pure utility func */
-int convertXPos(int x, int len);
-int convertYPos(int y, int height);
-int getStringHeight(char *s);
 
 
 #endif
