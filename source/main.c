@@ -31,6 +31,7 @@ void JunSeong()
 {
     /* 조준성 전용 */
     drawScoreboard();
+    gotoxy(0, _ALIGN_BOTTOM_);
 }
 
 void JunSeo()

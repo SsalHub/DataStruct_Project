@@ -24,18 +24,18 @@ void rank(int score) {
     return;
 }
 void drawScoreboard() {
+    char filter[100];
     clearScreen();
     //rank(score);
-    gotoxy(19, 1);
-    fprintf(stdout, "+------------------------+\n");
-    gotoxy(19, 2);
-    fprintf(stdout, "|          점수판        |\n");
-    gotoxy(19, 3);
-    fprintf(stdout, "+------------------------+\n");   
     
+    printString("+------------------------+", 19, 1);
+    printString("|          점수판        |", 19, 2);
+    printString("+------------------------+", 19, 3);
+
     for (int a = 1; a < 11; a++) {
-        gotoxy(18, 4 + a);
-        fprintf(stdout,"%5d위   score : %7d\n", a, rankArr[a - 1]); // 랭킹 출력
+        
+        sprintf(filter,"%5d위   score : %7d\n", a, rankArr[a - 1]); // 랭킹 출력
+        printString(filter, 18, 4 + a);
     }
     
 }
