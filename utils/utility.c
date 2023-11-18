@@ -3,151 +3,176 @@
 
 
 
-/* pure utility func */
-int convertXPos(int x, int len)
-{
-	if (x < 1)
-	{
-		switch (x)
-		{
-			case _X_CENTER_:
-				x = (_SCREEN_WIDTH_ - len) * 0.5f + 1;
-				break;
-
-			case _X_LEFT_:
-				x = 1;
-				break;
-
-			case _X_RIGHT_:
-				x = _SCREEN_WIDTH_;
-				break;
-
-			default:
-				/* error */
-				fprintf(stdout, "Error Occurred!\nx value in convertXPos(%d, %d) func is invalid.\n", x, len);
-				exit(1);
-				break;
-		}
-	}
-	if (_SCREEN_WIDTH_ < x) 
-	{
-		/* error */
-		fprintf(stdout, "Error Occurred!\nx value in convertXPos(%d, %d) func is invalid.\n", x, len);
-		exit(1);
-	}
-	return x;
-}
-
-int convertYPos(int y, int height)
-{
-	if (y < 1)
-	{
-		switch (y)
-		{
-		case _Y_CENTER_:
-			y = (_SCREEN_HEIGHT_ - height) * 0.5f + 1;
-			break;
-
-		case _Y_TOP_:
-			y = 1;
-			break;
-
-		case _Y_BOTTOM_:
-			y = _SCREEN_HEIGHT_;
-			break;
-
-		default:
-			/* error */
-			fprintf(stdout, "Error Occurred!\ny value in convertYPos(%d, %d) func is invalid.\n", y, height);
-			exit(1);
-			break;
-		}
-	}
-	if (_SCREEN_HEIGHT_ < y) 
-	{
-		/* error */
-		fprintf(stdout, "Error Occurred!\ny value in convertYPos(%d, %d) func is invalid.\n", y, height);
-		exit(1);
-	}
-	return y;
-}
-
-int getStringHeight(char *s)
-{
-	char *p;
-	int count = 1;
-
-	p = s;
-	while (*p != '\0')
-	{
-		if (*p == '\n') count++;
-		p++;
-	}
-	return count;
-}
-
-
 
 
 /* utility func of this game */
 void gotoxy(int x, int y)
 {
-	int convertX, convertY;
-	convertX = convertXPos(x, 0);
-	convertY = convertYPos(y, 0);
+	COORD pos = { x, y };
 
-	if ((convertX < 1 || _SCREEN_WIDTH_ < convertX) || (convertY < 1 || _SCREEN_HEIGHT_ < convertY))
+	if (x < 1)
 	{
-		/* error */
-		fprintf(stdout, "Error Occurred!\nx value in gotoxy(%d, %d) func is invalid.\n", x, y);
-		exit(1);
+		switch (x)
+		{
+		case _ALIGN_CENTER_:
+			pos.X = (_BORDER_RIGHT_ - 1) * 0.5f;
+			break;
+
+		case _ALIGN_LEFT_:
+			pos.X = _BORDER_LEFT_;
+			break;
+
+		case _ALIGN_RIGHT_:
+			pos.X = _BORDER_RIGHT_ - 1;
+			break;
+
+		default:
+			/* error case */
+			pos.X = _BORDER_LEFT_;
+		}
+	}
+	else
+	{
+		if (_BORDER_RIGHT_ <= x)
+			/* error case */
+			pos.X = _BORDER_RIGHT_ - 1;
 	}
 
-	COORD pos = { x, y };
+	if (y < 1)
+	{
+		switch (y)
+		{
+		case _ALIGN_CENTER_:
+			pos.Y = (_BORDER_BOTTOM_ - 1) * 0.5f;
+			break;
+
+		case _ALIGN_TOP_:
+			pos.Y = _BORDER_TOP_;
+			break;
+
+		case _ALIGN_BOTTOM_:
+			pos.Y = _BORDER_BOTTOM_ - 1;
+			break;
+
+			/* error case */
+		default:
+			pos.Y = _BORDER_TOP_;
+		}
+	}
+	else
+	{
+		/* error case */
+		if (_BORDER_BOTTOM_ <= y)
+			pos.Y = _BORDER_BOTTOM_ - 1;
+	}
+
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 }
 
-void printString(char *s, int x, int y)
+void printString(char* s, int x, int y)
 {
-	char *token;
-	int len, height, centerX, beginX, endX;
+	COORD pos;
+	char* token;
+	int len, width, height, beginX;
+	
+	len = strlen(s);
+	if (len <= 0) return;
 
-	/* First Line */
+	setStringInfo(s, &width, &height);
+	if (width % 2 != 0) width++;
+
+	/* Fix X Coordinate */
+	if (x < 1)
+	{
+		switch (x)
+		{
+		case _ALIGN_CENTER_:
+			beginX = 1 + ((_SCREEN_WIDTH_ - width) * 0.5f);
+			break;
+
+		case _ALIGN_LEFT_:
+			beginX = _BORDER_LEFT_ + 1;
+			break;
+
+		case _ALIGN_RIGHT_:
+			beginX = _BORDER_RIGHT_ - width;
+			break;
+
+		default:
+			/* error case */
+			beginX = _BORDER_LEFT_ + 1;
+		}
+	}
+	else
+	{
+		/* error case */
+		if (_BORDER_RIGHT_ <= x)
+			beginX = _BORDER_RIGHT_ - width;
+		else
+			beginX = x;
+	}
+	/* Fix Y Coordinate */
+	if (y < 1)
+	{
+		switch (y)
+		{
+		case _ALIGN_CENTER_:
+			pos.Y = (_SCREEN_HEIGHT_ - height) * 0.5f;
+			break;
+
+		case _ALIGN_TOP_:
+			pos.Y = _BORDER_TOP_ + 1;
+			break;
+
+		case _ALIGN_BOTTOM_:
+			pos.Y = _BORDER_BOTTOM_ - height;
+			break;
+
+		default:
+			/* error case */
+			pos.Y = _BORDER_TOP_ + 1;
+		}
+	}
+	else
+	{
+		/* error case */
+		if (_BORDER_BOTTOM_ <= y)
+			pos.Y = _BORDER_BOTTOM_ - height;
+		else
+			pos.Y = y;
+	}
+	/* Main Loop */
 	token = strtok(s, "\n");
-	len = strlen(token);
-	height = getStringHeight(s);
-
-	beginX = convertXPos(x, len);
-	endX = beginX + len;
-
-	y = convertYPos(y, height);
-	centerX = beginX + (len * 0.5f);
-
-	gotoxy(beginX, y++);
-	fprintf(stdout, "%s\n", token);
-
-	/* Second Line ~ Last Line */
-	token = strtok(NULL, "\n");
-	if (token == NULL) return;	// There is no second line 
 	while (token != NULL)
 	{
-		len = strlen(token);
-		beginX = centerX - (len * 0.5f);
-		/* continue : error 발생, 문자열이 게임 테두리선을 넘어감 */ 
-		if (beginX < 1) continue;
-		gotoxy(beginX, y++);
-		fprintf(stdout, "%s\n", token);
+		if (_BORDER_BOTTOM_ <= pos.Y) return;
+		if (pos.Y <= _BORDER_TOP_)
+		{
+			token = strtok(NULL, "\n");
+			pos.Y++;
+			continue;
+		}
+		// else
+		pos.X = beginX;
+		fixEachLine(token, &(pos.X));
+
+		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
+		fprintf(stdout, token);
+
 		token = strtok(NULL, "\n");
+		pos.Y++;
 	}
 }
 
 void clearScreen()
 {
+	COORD pos = { _BORDER_LEFT_ + 1, 0 };
 	int i, j;
 
-	for (j = 1; j <= _SCREEN_HEIGHT_; j++)
+	for (j = _BORDER_TOP_ + 1; j < _BORDER_BOTTOM_; j++)
 	{
-		gotoxy(1, j);
+		pos.Y = j;
+		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 		for (i = 0; i < _SCREEN_WIDTH_; i++)
 		{
 			fprintf(stdout, " ");
@@ -155,6 +180,76 @@ void clearScreen()
 	}
 }
 
+
+
+
+
+
+
+/* pure utility func */
+void setStringInfo(char* s, int* w, int* h)
+{
+	char* p;
+	int len;
+
+	*w = -1;
+	*h = 1;
+	len = 0;
+	p = s;
+	while (*p != '\0')
+	{
+		if (*p == '\n')
+		{
+			if (*w < len) *w = len;
+			len = 0;
+			*h += 1;
+			p++;
+			continue;
+		}
+		// else
+		len++;
+		p++;
+	}
+}
+
+void fixEachLine(char* currStr, short* x)
+{
+	char* nextStr;
+	int len, exclude, endX;
+
+	len = strlen(currStr);
+
+	/* Fix Begin Index(coordinate) into Game Area */
+	if (*x <= _BORDER_LEFT_)
+	{
+		exclude = (_BORDER_LEFT_ + 1) - *x;
+		len -= exclude;
+		currStr += exclude;
+		*x = 1;
+	}
+	/* Insert NULL Character to Exclude Off-Screen Characters from Original String */
+	endX = *x + len;
+	if (_BORDER_RIGHT_ <= endX)
+	{
+		nextStr = currStr + len + 1;
+		exclude = (endX - (_BORDER_RIGHT_ - 1));
+		len -= exclude;
+		*(currStr + len) = '\n';
+		*(currStr + len + 1) = '\0';
+		/* Append Each Separated String, 'currStr' and 'nextStr' */
+		strcat(currStr, nextStr);
+	}
+}
+
+
+
+
+
+
+
+
+
+/* game initialization func*/
 void initGame()
 {
 	drawBorder();
@@ -165,7 +260,7 @@ void drawBorder()
 	int i, j;
 
 	/* First Line*/
-	for (i = 0; i < _SCREEN_WIDTH_ + 2; i++)
+	for (i = 0; i < _BORDER_RIGHT_; i++)
 	{
 		fprintf(stdout, "#");
 	}
@@ -183,9 +278,12 @@ void drawBorder()
 	}
 
 	/* Last Line */
-	for (i = 0; i < _SCREEN_WIDTH_ + 2; i++)
+	for (i = 0; i < _BORDER_RIGHT_; i++)
 	{
 		fprintf(stdout, "#");
 	}
 	fprintf(stdout, "\n");
 }
+
+
+
