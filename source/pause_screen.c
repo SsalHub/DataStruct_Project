@@ -1,51 +1,55 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "pause_screen.h"
 
+
+
 void Pause()
 {
+
     clearScreen(); // 화면을 지워 새로운 화면 출력
+    const int MAX_SELECT = 4;
+    int selectIndex = 0;
+    char input;
 
-    // 가운데에 "PAUSE" 출력
-    int pauseTextLength = strlen("*********PAUSE********");
-    int pauseX = (_SCREEN_WIDTH_ - pauseTextLength) / 2;
-    int pauseY = _SCREEN_HEIGHT_ / 4;
-    gotoxy(pauseX, pauseY);
-    fprintf(stdout, "*********PAUSE********");
+    //화면 글씨 출력
+    char Pause[100] = "P A U S E";
+    printString(Pause, 26, 4);
+    char score[100] = "Current Score : ";
+    printString(score, 20, 9);
+    char s1[100] = "1 : Resume";
+    printString(s1, 23, 13);
+    char s2[100] = "2 : Option";
+    printString(s2, 23, 16);
+    char s3[100] = "3 : Back to Stage Select";
+    printString(s3, 23, 19);
+    char s4[100] = "4 : Back to Main Menu";
+    printString(s4, 23, 22);
 
-    // 점수 및 난이도 출력
-    gotoxy(20, pauseY + 5);
-    fprintf(stdout, "점수 : ");
-
-    gotoxy(40, pauseY + 5);
-    fprintf(stdout, "난이도 : ");
-
-    // 메뉴 출력
-    gotoxy(20, pauseY + 10);
-    fprintf(stdout, "1. 게임으로 돌아가기");
-
-    gotoxy(40, pauseY + 10);
-    fprintf(stdout, "2. 게임 종료");
-
-    gotoxy(30, pauseY + 25);
-    fprintf(stdout, "3. 설정");
-
-    // 사용자 입력 받기
-    char choice = _getch();
-
-    // 사용자의 선택에 따라 동작
-    switch (choice) {
-    case '1':
-        // 게임으로 돌아가기
-        break;
-    case '2':
-        // 게임 종료
-        break;
-    case '3':
-        // 설정창 보여주기
-        ShowSettings();
-        break;
-    default:
-        fprintf(stdout, "잘못 입력하였습니다.");
-        break;
+    //키보드로 입력받기
+    while (1) {
+        if (_kbhit()) {
+            input = _getch();
+            switch (input) {
+            case _DOWN_: //최대값은 4
+                if (selectIndex + 1 <= MAX_SELECT)
+                    selectIndex += 1;
+                Sleep(10);
+                break;
+            case _UP_: //최소값은 0
+                if (selectIndex - 1 >= 1)
+                    selectIndex -= 1;
+                Sleep(10);
+                break;
+            /*
+            case _CARRIAGE_RETURN_: //엔터키 눌렀을 때
+                choice(selectIndex);
+                Sleep(10);
+                break;
+                */
+            default:
+                break;
+            }
+        }
     }
+
 }
