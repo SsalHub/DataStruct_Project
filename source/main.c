@@ -4,8 +4,8 @@
 int main(void) {
     initGame();
 
-    //JaeUk();
-    SunHeok();
+    JaeUk();
+    //SunHeok();
     //JunSeong();
     //JunSeo();
 
@@ -16,8 +16,8 @@ void JaeUk()
 {
     /* 송재욱 전용 */
     char s[64];
-    strcpy(s, "문자열\n출력\n테스트\n");
-    printString(s, _ALIGN_CENTER_, _ALIGN_CENTER_);
+    strcpy(s, "문자열");
+    printString(s, _ALIGN_CENTER_, _ALIGN_BOTTOM_);
     gotoxy(_ALIGN_RIGHT_, _ALIGN_BOTTOM_);
 }
 
