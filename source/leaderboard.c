@@ -2,7 +2,7 @@
 #include "leaderboard.h"
 
 int rankArr[10] = {0};
-
+int A;
 //·©Å· Ãâ·Â
 void rank(int score) {
     int tmp, x;
