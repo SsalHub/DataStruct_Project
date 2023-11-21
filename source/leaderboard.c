@@ -3,6 +3,7 @@
 
 int rankArr[10] = {0};
 int A;
+int B;
 //·©Å· Ãâ·Â
 void rank(int score) {
     int tmp, x;
