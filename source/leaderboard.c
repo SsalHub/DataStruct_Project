@@ -1,7 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "leaderboard.h"
 
-
 int rankArr[10] = {0};
 
 //랭킹 출력
@@ -31,6 +30,7 @@ void drawScoreboard() {
     printString("+------------------------+", 19, 1);
     printString("|          점수판        |", 19, 2);
     printString("+------------------------+", 19, 3);
+
 
     for (int a = 1; a < 11; a++) {
         
