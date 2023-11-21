@@ -2,9 +2,8 @@
 #include "leaderboard.h"
 
 int rankArr[10] = {0};
-int A;
-int B;
-//·©Å· Ãâ·Â
+int A,b;
+//ë­í‚¹ ì¶œë ¥
 void rank(int score) {
     int tmp, x;
     if (rankArr[9] >= score) {
@@ -29,13 +28,13 @@ void drawScoreboard() {
     //rank(score);
     
     printString("+------------------------+", 19, 1);
-    printString("|          Á¡¼öÆÇ        |", 19, 2);
+    printString("|          ì ìˆ˜íŒ        |", 19, 2);
     printString("+------------------------+", 19, 3);
 
 
     for (int a = 1; a < 11; a++) {
         
-        sprintf(filter,"%5dÀ§   score : %7d\n", a, rankArr[a - 1]); // ·©Å· Ãâ·Â
+        sprintf(filter,"%5dìœ„   score : %7d\n", a, rankArr[a - 1]); // ë­í‚¹ ì¶œë ¥
         printString(filter, 18, 4 + a);
     }
     
