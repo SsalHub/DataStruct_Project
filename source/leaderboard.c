@@ -1,8 +1,25 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "leaderboard.h"
+#define MAX_NAME_LENGTH 20
+typedef struct {
+    int score;
+    char name[MAX_NAME_LENGTH];
+} Entry;
 
+void bubbleSort(Entry arr[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j].score < arr[j + 1].score) {
+                Entry temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
 
 void drawScoreboard() {
+    Entry entries[10];  
     char filter[50];
     char str[50];
     clearScreen();
@@ -18,26 +35,28 @@ void drawScoreboard() {
         printString("파일 열기 실패\n", 19, 1);
         exit(1);
     }
-    int rank = 1; 
-    while (fgets(filter, sizeof(filter), file) != NULL) {
-        
+
+    int rank = 0;
+    while (fgets(filter, sizeof(filter), file) != NULL && rank < 10) {
         char* scoreToken = strtok(filter, " ");
         char* nameToken = strtok(NULL, " \n");
 
         if (scoreToken != NULL && nameToken != NULL) {
-           
             int score = atoi(scoreToken);
-
-
-            sprintf(str, "%2d위  score : %5d name : %s\n", rank, score, nameToken);
-            printString(str, 16, rank + 3); 
-
+            
+            entries[rank].score = score;
+            strcpy(entries[rank].name, nameToken);
             rank++;
-            if (rank > 10) {
-                break; 
-            }
         }
     }
 
     fclose(file);
+
+   
+    bubbleSort(entries, rank);
+
+    for (int i = 0; i < rank; i++) {
+        sprintf(str, "%2d위  score : %5d name : %s\n", i + 1, entries[i].score, entries[i].name);
+        printString(str, 16, 4 + i);
+    }
 }
