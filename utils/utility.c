@@ -87,7 +87,7 @@ void printString(char* s, int x, int y)
 		switch (x)
 		{
 		case _ALIGN_CENTER_:
-			beginX = ((_BORDER_LEFT_ + 1) + _SCREEN_WIDTH_ - width) * 0.5f;
+			beginX = ((_SCREEN_WIDTH_ - 1) - width) * 0.5f;
 			break;
 
 		case _ALIGN_LEFT_:
@@ -95,7 +95,7 @@ void printString(char* s, int x, int y)
 			break;
 
 		case _ALIGN_RIGHT_:
-			beginX = (_BORDER_LEFT_ + 1) + _BORDER_RIGHT_ - width;
+			beginX = (_BORDER_RIGHT_ - 1) - width;
 			break;
 
 		default:
@@ -107,7 +107,7 @@ void printString(char* s, int x, int y)
 	{
 		/* error case */
 		if (_BORDER_RIGHT_ <= x)
-			beginX = (_BORDER_LEFT_ + 1) + _BORDER_RIGHT_ - width;
+			beginX = (_BORDER_RIGHT_ - 1) - width;
 		else
 			beginX = x;
 	}
@@ -125,7 +125,7 @@ void printString(char* s, int x, int y)
 			break;
 
 		case _ALIGN_BOTTOM_:
-			pos.Y = _BORDER_BOTTOM_ - height;
+			pos.Y = (_BORDER_BOTTOM_ - 1) - height;
 			break;
 
 		default:
@@ -137,7 +137,7 @@ void printString(char* s, int x, int y)
 	{
 		/* error case */
 		if (_BORDER_BOTTOM_ <= y)
-			pos.Y = (_BORDER_TOP_ + 1) + _BORDER_BOTTOM_ - height;
+			pos.Y = (_BORDER_BOTTOM_ - 1) - height;
 		else
 			pos.Y = y;
 	}
@@ -192,7 +192,7 @@ void setStringInfo(char* s, int* w, int* h)
 	char* p;
 	int len;
 
-	*w = -1;
+	*w = 0;
 	*h = 1;
 	len = 0;
 	p = s;
