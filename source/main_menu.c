@@ -6,13 +6,21 @@ void showMainMenu()
     char buffer[64];
     int x, y, len;
 
+    const char* filePath = "C:\\Users\\junseo\\Desktop\\datastruct\\teamproject\\datastruct_project\\DataStruct_Project\\resources\\title_logo.txt";
+    FILE* file = fopen(filePath, "r");
+    
+    if (file == NULL) {
+        printf("파일을 열 수 없습니다.\n");
+        return 1;
+    }
+    
+    gotoxy(10, 10);
 
-    strcpy(buffer, "Main Menu");
-    printString(buffer, _ALIGN_CENTER_, _ALIGN_CENTER_);
-
-
-    strcpy(buffer, "Press Any Key.");
-    printString(buffer, _ALIGN_CENTER_, _ALIGN_BOTTOM_);
+    while (fgets(buffer, sizeof(buffer), file) != NULL) {
+        printf("%s", buffer);
+    }
+    
+    fclose(file);
     while (!_kbhit());
 
 }
