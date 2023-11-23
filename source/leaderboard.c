@@ -3,7 +3,7 @@
 
 int rankArr[10] = {0};
 
-//ë­í‚¹ ì¶œë ¥
+//·©Å· Ãâ·Â
 void rank(int score) {
     int tmp, x;
     if (rankArr[9] >= score) {
@@ -25,17 +25,19 @@ void rank(int score) {
 void drawScoreboard() {
     char filter[100];
     clearScreen();
-    //rank(score);
     
-    printString("+------------------------+", 19, 1);
-    printString("|          ì ìˆ˜íŒ        |", 19, 2);
-    printString("+------------------------+", 19, 3);
+    rank(9000);
+    rank(345);
+    rank(25623);
 
+    printString("+------------------------+", 19, 1);
+    printString("|          Á¡¼öÆÇ        |", 19, 2);
+    printString("+------------------------+", 19, 3);
 
     for (int a = 1; a < 11; a++) {
         
-        sprintf(filter,"%5dìœ„   score : %7d\n", a, rankArr[a - 1]); // ë­í‚¹ ì¶œë ¥
+        sprintf(filter,"%5dÀ§   score : %7d\n", a, rankArr[a - 1]); // ·©Å· Ãâ·Â
         printString(filter, 18, 4 + a);
     }
-    
+
 }
