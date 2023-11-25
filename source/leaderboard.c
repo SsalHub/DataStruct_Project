@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "leaderboard.h"
 #define MAX_NAME_LENGTH 20
+
 typedef struct {
     int score;
     char name[MAX_NAME_LENGTH];
@@ -16,6 +17,12 @@ void bubbleSort(Entry arr[], int n) {
             }
         }
     }
+}
+
+void gotoMain() {
+    printString("▶▶ 메인화면으로(아무 키나 누르세요)", 12, 20);
+    getch();
+    // 메인 화면함수 추가해야함
 }
 
 void drawScoreboard() {
@@ -59,4 +66,6 @@ void drawScoreboard() {
         sprintf(str, "%2d위  score : %5d name : %s\n", i + 1, entries[i].score, entries[i].name);
         printString(str, 16, 4 + i);
     }
+
+    gotoMain();
 }
