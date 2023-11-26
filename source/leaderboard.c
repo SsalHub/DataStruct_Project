@@ -22,7 +22,8 @@ void bubbleSort(Entry arr[], int n) {
 void gotoMain() {
     printString("▶▶ 메인화면으로(아무 키나 누르세요)", 12, 20);
     getch();
-    // 메인 화면함수 추가해야함
+    clearScreen();
+    showMainMenu();
 }
 
 void drawScoreboard() {
