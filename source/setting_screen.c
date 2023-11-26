@@ -8,18 +8,18 @@ void ShowSettings() {
 
     clearScreen();
 
-    // 설정창 출력
-    gotoxy(30, 2);
-    fprintf(stdout, "------------------설정------------------");
-    gotoxy(30, 10);
-    fprintf(stdout, "1. 음량 설정");
-    gotoxy(30, 20);
-    fprintf(stdout, "2. 난이도 설정");
+    char Option[100] = "------------------설정------------------";
+    printString(Option, 20, 9);
+    char s1[100] = "1. 음량 설정";
+    char s2[100] = "2. 난이도 설정";
+    printString(s1, 23, 13);
+    printString(s2, 23, 16);
 
     // 사용자 입력 받기
     char choice = _getch();
+}
 
-    // 사용자의 선택에 따라 동작
+    /* 사용자의 선택에 따라 동작
     switch (choice) {
     case '1':
         AdjustVolume();
@@ -35,7 +35,7 @@ void ShowSettings() {
         fprintf(stdout, "잘못 입력하였습니다.");
         break;
     }
-}
+}*/
 
 
 
