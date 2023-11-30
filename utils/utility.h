@@ -16,6 +16,8 @@
 #include <stdbool.h>
 #include <string.h>
 #include <windows.h>
+#include <wchar.h>
+#include <locale.h>
 
 
 typedef enum ScreenAlign
@@ -98,7 +100,13 @@ typedef enum InputType
 
 } InputType;
 
-
+// Open Source Code to Use 'wcwidth()' func
+// https://github.com/mattn/wcwidth.c/blob/master/wcwidth.c
+struct interval
+{
+	long first;
+	long last;
+};
 
 
 /* utility func of this game */
@@ -109,16 +117,19 @@ void clearScreen();
 
 
 
-/* pure utility func */
-void setStringInfo(char* s, int* w, int* h);
-void fixEachLine(char* beginIdx, short* x);
-
-
-
-
 /* game initialization func*/
 void initGame();
 void drawBorder();
+
+
+
+
+/* pure utility func */
+void setStringInfo(wchar_t* ws, int* w, int* h);
+void fixEachLine(char* beginIdx, short* x);
+static int bisearch(wchar_t ucs, const struct interval* table, int max);
+int wcwidth(wchar_t ucs);
+
 
 
 
