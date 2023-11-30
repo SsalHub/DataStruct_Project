@@ -71,6 +71,7 @@ void gotoxy(int x, int y)
 
 void printString(char* s, int x, int y)
 {
+	//wchar_t* ws;
 	COORD pos;
 	char* token;
 	int len, width, height, beginX;
@@ -78,7 +79,11 @@ void printString(char* s, int x, int y)
 	len = strlen(s);
 	if (len <= 0) return;
 
+	width = height = 0;
+	/*ws = (wchar_t*)malloc(sizeof(wchar_t)*len + 1);
+	MultiByteToWideChar(CP_ACP, 0, s, len + 1, ws, MultiByteToWideChar(CP_ACP, 0, s, -1, NULL, NULL));*/
 	setStringInfo(s, &width, &height);
+	/*free(ws);*/
 	if (width % 2 != 0) width++;
 
 	/* Fix X Coordinate */
@@ -87,7 +92,7 @@ void printString(char* s, int x, int y)
 		switch (x)
 		{
 		case _ALIGN_CENTER_:
-			beginX = ((_BORDER_LEFT_ + 1) + _SCREEN_WIDTH_ - width) * 0.5f;
+			beginX = ((_BORDER_RIGHT_ - 1) - width) * 0.5f;
 			break;
 
 		case _ALIGN_LEFT_:
@@ -95,7 +100,7 @@ void printString(char* s, int x, int y)
 			break;
 
 		case _ALIGN_RIGHT_:
-			beginX = (_BORDER_LEFT_ + 1) + _BORDER_RIGHT_ - width;
+			beginX = (_BORDER_RIGHT_ - 1) - width;
 			break;
 
 		default:
@@ -107,7 +112,7 @@ void printString(char* s, int x, int y)
 	{
 		/* error case */
 		if (_BORDER_RIGHT_ <= x)
-			beginX = (_BORDER_LEFT_ + 1) + _BORDER_RIGHT_ - width;
+			beginX = (_BORDER_RIGHT_ - 1) - width;
 		else
 			beginX = x;
 	}
@@ -125,7 +130,7 @@ void printString(char* s, int x, int y)
 			break;
 
 		case _ALIGN_BOTTOM_:
-			pos.Y = _BORDER_BOTTOM_ - height;
+			pos.Y = (_BORDER_BOTTOM_ - 1) - height;
 			break;
 
 		default:
@@ -137,7 +142,7 @@ void printString(char* s, int x, int y)
 	{
 		/* error case */
 		if (_BORDER_BOTTOM_ <= y)
-			pos.Y = (_BORDER_TOP_ + 1) + _BORDER_BOTTOM_ - height;
+			pos.Y = (_BORDER_BOTTOM_ - 1) - height;
 		else
 			pos.Y = y;
 	}
@@ -186,68 +191,6 @@ void clearScreen()
 
 
 
-/* pure utility func */
-void setStringInfo(char* s, int* w, int* h)
-{
-	char* p;
-	int len;
-
-	*w = -1;
-	*h = 1;
-	len = 0;
-	p = s;
-	while (*p != '\0')
-	{
-		if (*p == '\n')
-		{
-			if (*w < len) *w = len;
-			len = 0;
-			*h += 1;
-			p++;
-			continue;
-		}
-		// else
-		len++;
-		p++;
-	}
-}
-
-void fixEachLine(char* currStr, short* x)
-{
-	char* nextStr;
-	int len, exclude, endX;
-
-	len = strlen(currStr);
-
-	/* Fix Begin Index(coordinate) into Game Area */
-	if (*x <= _BORDER_LEFT_)
-	{
-		exclude = (_BORDER_LEFT_ + 1) - *x;
-		len -= exclude;
-		currStr += exclude;
-		*x = 1;
-	}
-	/* Insert NULL Character to Exclude Off-Screen Characters from Original String */
-	endX = *x + len;
-	if (_BORDER_RIGHT_ <= endX)
-	{
-		nextStr = currStr + len + 1;
-		exclude = (endX - (_BORDER_RIGHT_ - 1));
-		len -= exclude;
-		*(currStr + len) = '\n';
-		*(currStr + len + 1) = '\0';
-		/* Append Each Separated String, 'currStr' and 'nextStr' */
-		strcat(currStr, nextStr);
-	}
-}
-
-
-
-
-
-
-
-
 
 /* game initialization func*/
 void initGame()
@@ -287,3 +230,52 @@ void drawBorder()
 
 
 
+
+
+
+
+
+/* pure utility func */
+void setStringInfo(char* s, int* w, int* h)
+{
+	char *token;
+	int len;
+
+	token = strtok(s, "\n");
+	while (token)
+	{
+		*h += 1;
+		len = strlen(token);
+		if (*w < len) *w = len;
+		token = strtok(NULL, "\n");
+	}
+}
+
+void fixEachLine(char* currStr, short* x)
+{
+	char* nextStr;
+	int len, exclude, endX;
+
+	len = strlen(currStr);
+
+	/* Fix Begin Index(coordinate) into Game Area */
+	if (*x <= _BORDER_LEFT_)
+	{
+		exclude = (_BORDER_LEFT_ + 1) - *x;
+		len -= exclude;
+		currStr += exclude;
+		*x = 1;
+	}
+	/* Insert NULL Character to Exclude Off-Screen Characters from Original String */
+	endX = *x + len;
+	if (_BORDER_RIGHT_ <= endX)
+	{
+		nextStr = currStr + len + 1;
+		exclude = (endX - (_BORDER_RIGHT_ - 1));
+		len -= exclude;
+		*(currStr + len) = '\n';
+		*(currStr + len + 1) = '\0';
+		/* Append Each Separated String, 'currStr' and 'nextStr' */
+		strcat(currStr, nextStr);
+	}
+}

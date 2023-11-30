@@ -13,6 +13,7 @@
 
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
 #include <windows.h>
@@ -109,17 +110,16 @@ void clearScreen();
 
 
 
-/* pure utility func */
-void setStringInfo(char* s, int* w, int* h);
-void fixEachLine(char* beginIdx, short* x);
-
-
-
-
 /* game initialization func*/
 void initGame();
 void drawBorder();
 
+
+
+
+/* pure utility func */
+void setStringInfo(char* s, int* w, int* h);
+void fixEachLine(char* beginIdx, short* x);
 
 
 
