@@ -279,9 +279,3 @@ void fixEachLine(char* currStr, short* x)
 		strcat(currStr, nextStr);
 	}
 }
-
-int getUnicodeWidth(char* s)
-{
-
-	return 0;
-}

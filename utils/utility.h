@@ -120,7 +120,6 @@ void drawBorder();
 /* pure utility func */
 void setStringInfo(char* s, int* w, int* h);
 void fixEachLine(char* beginIdx, short* x);
-int getUnicodeWidth(char* s);
 
 
 
