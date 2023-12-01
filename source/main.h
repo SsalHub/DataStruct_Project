@@ -7,6 +7,7 @@
 #include "leaderboard.h"
 #include "pause_screen.h"
 #include "setting_screen.h"
+#include "stage_play_screen.h"
 
 
 void JaeUk();
