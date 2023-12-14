@@ -70,3 +70,53 @@ void drawScoreboard() {
 
     gotoMain();
 }
+
+void updateScoreboard(int newScore, const char* newName) {
+    Entry entries[10];
+    char filter[50];
+    FILE* file = fopen("C:\\Users\\user7\\OneDrive\\바탕 화면\\Data_struct_sub\\data_structproject\\DataStruct_Project\\resources\\ranking.dat", "r");
+
+    if (file == NULL) {
+        printString("파일 열기 실패\n", 19, 1);
+        exit(1);
+    }
+
+    int rank = 0;
+    while (fgets(filter, sizeof(filter), file) != NULL && rank < 10) {
+        char* scoreToken = strtok(filter, " ");
+        char* nameToken = strtok(NULL, " \n");
+
+        if (scoreToken != NULL && nameToken != NULL) {
+            int score = atoi(scoreToken);
+
+            entries[rank].score = score;
+            strcpy(entries[rank].name, nameToken);
+            rank++;
+        }
+    }
+
+    fclose(file);
+
+    
+    if (newScore > entries[9].score) {
+        entries[9].score = newScore;
+        strncpy(entries[9].name, newName, MAX_NAME_LENGTH - 1);
+        entries[9].name[MAX_NAME_LENGTH - 1] = '\0'; // Ensure null-termination
+
+        
+        bubbleSort(entries, 10);
+
+        
+        file = fopen("C:\\Users\\user7\\OneDrive\\바탕 화면\\Data_struct_sub\\data_structproject\\DataStruct_Project\\resources\\ranking.dat", "w");
+        if (file == NULL) {
+            printString("파일 쓰기 실패\n", 19, 1);
+            exit(1);
+        }
+
+        for (int i = 0; i < 10; i++) {
+            fprintf(file, "%d %s\n", entries[i].score, entries[i].name);
+        }
+
+        fclose(file);
+    }
+}

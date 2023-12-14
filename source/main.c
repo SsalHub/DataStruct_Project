@@ -30,6 +30,7 @@ void SunHeok()
 void JunSeong()
 {
     /* 조준성 전용 */
+    //updateScoreboard(1000, "cjs");
     drawScoreboard();
 }
 
