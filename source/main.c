@@ -16,8 +16,8 @@ void JaeUk()
 {
     /* 송재욱 전용 */
     char s[64];
-    strcpy(s, "문자열\n출력\n테스트\n");
-    printString(s, _ALIGN_CENTER_, _ALIGN_CENTER_);
+    strcpy(s, "문자열 출력 테스트");
+    printString(s, _ALIGN_CENTER_, _ALIGN_BOTTOM_);
     gotoxy(_ALIGN_RIGHT_, _ALIGN_BOTTOM_);
 }
 
@@ -31,7 +31,6 @@ void JunSeong()
 {
     /* 조준성 전용 */
     drawScoreboard();
-    gotoxy(0, _ALIGN_BOTTOM_);
 }
 
 void JunSeo()
