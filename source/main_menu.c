@@ -6,7 +6,7 @@ void showMainMenu()
     char buffer[64];
     int x, y, len;
 
-    const char* filePath = "C:\\Users\\junseo\\Desktop\\datastruct\\teamproject\\datastruct_project\\DataStruct_Project\\resources\\title_logo.txt";
+    const char* filePath = LOGO_PATH;
     FILE* file = fopen(filePath, "r");
     
     if (file == NULL) {
@@ -14,7 +14,7 @@ void showMainMenu()
         return 1;
     }
     
-    gotoxy(10, 10);
+    gotoxy(_ALIGN_CENTER_, _ALIGN_TOP_);
 
     while (fgets(buffer, sizeof(buffer), file) != NULL) {
         printf("%s", buffer);
