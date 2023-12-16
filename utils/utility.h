@@ -18,7 +18,6 @@
 #include <string.h>
 #include <windows.h>
 
-
 typedef enum ScreenAlign
 {
 	_ALIGN_NONE_ = -100,
