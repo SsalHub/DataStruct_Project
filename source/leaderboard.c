@@ -32,7 +32,7 @@ void drawScoreboard() {
 
     const char* fp = RANKING_PATH;
     FILE* file = fopen(fp, "r");
-
+    
     if (file == NULL) {
         printString("파일 열기 실패\n", 19, 1);
         exit(1);
