@@ -2,9 +2,7 @@
 #include "pause_screen.h"
 #include <conio.h>
 
-
 int CurserPoint = 13;
-
 
 void choice(selectIndex) {
     switch (selectIndex) {
