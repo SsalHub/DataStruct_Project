@@ -3,6 +3,7 @@
 
 void showMainMenu()
 {
+    clearScreen();
     char buffer[64];
     int x, y, len;
 
