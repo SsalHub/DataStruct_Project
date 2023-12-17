@@ -7,7 +7,7 @@ int main(void) {
     //JaeUk();
     //SunHeok();
     //JunSeong();
-    JunSeo();
+    //JunSeo();
 
     return 0;
 }
@@ -30,8 +30,9 @@ void SunHeok()
 void JunSeong()
 {
     /* 조준성 전용 */
-    //updateScoreboard(1000, "cjs");
     drawScoreboard();
+    //resultStageScreen(1000, "cjs");
+    
 }
 
 void JunSeo()

@@ -114,3 +114,7 @@ void updateScoreboard(int newScore, const char* newName) {
         fclose(file);
     }
 }
+void resultStageScreen(int newScore, const char* newName) {
+    updateScoreboard(newScore, newName);
+    drawScoreboard();
+}

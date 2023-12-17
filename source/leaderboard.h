@@ -16,6 +16,6 @@ typedef struct {
 } Entry;
 
 void drawScoreboard();
-
+void resultStageScreen();
 
 #endif
