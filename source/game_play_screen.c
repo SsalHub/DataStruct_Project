@@ -4,5 +4,5 @@ void initStageScreen()
 {
 
 
-	 //resultStageScreen(int newScore, const char* newName);
+	 //resultStageScreen();
 }
