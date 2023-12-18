@@ -4,5 +4,5 @@ void initStageScreen()
 {
 
 
-	 //resultStageScreen();
+	 //resultStageScreen(newScore, newName);
 }
