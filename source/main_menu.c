@@ -1,5 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "main_menu.h"
+#include <errno.h>
 
 
 void showMainMenu()
@@ -8,11 +9,11 @@ void showMainMenu()
     char buffer[64];
     int x, y, len;
 
-    const char* filePath = LOGO_PATH;
-    FILE* file = fopen(filePath, "r");
+    //const char* filePath = LOGO_PATH;
+    FILE* file = fopen("./title_logo.txt", "r");
     
     if (file == NULL) {
-        printf("파일을 열 수 없습니다.\n");
+        printf("[%d] 파일을 열 수 없습니다.\n", errno);
         return 1;
     }
     
@@ -24,19 +25,18 @@ void showMainMenu()
     
     fclose(file);
 
-
     // 메뉴 출력
-    gotoxy(20, 16);
-    fprintf(stdout, "1. Start Game");
+    strcpy(buffer, "1. Start Game");
+    printString(buffer, _ALIGN_CENTER_, 12);
+    
+    strcpy(buffer, "2. Option");
+    printString(buffer, _ALIGN_CENTER_, 14);
+    
+    strcpy(buffer, "3. Ranking");
+    printString(buffer, _ALIGN_CENTER_, 16);
 
-    gotoxy(20, 18);
-    fprintf(stdout, "2. Option");
-
-    gotoxy(20, 20);
-    fprintf(stdout, "3. Ranking");
-
-    gotoxy(20, 22);
-    fprintf(stdout, "4. Exit Game");
+    strcpy(buffer, "4. Exit Game");
+    printString(buffer, _ALIGN_CENTER_, 18);
 
     // 사용자 입력 받기
     char choice = _getch();
@@ -44,7 +44,7 @@ void showMainMenu()
     // 사용자의 선택에 따라 동작
     switch (choice) {
     case '1':
-        // Game start
+        loadStageSelect();
         break;
     case '2':
         // Option

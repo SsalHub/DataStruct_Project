@@ -1,15 +1,13 @@
 #ifndef __UTILDATA__
 #define __UTILDATA__
 
-#define _SCREEN_WIDTH_		60
-#define _SCREEN_HEIGHT_		24
 
 #define _BORDER_LEFT_		0
-#define _BORDER_RIGHT_		_SCREEN_WIDTH_+2
-
+#define _BORDER_RIGHT_		100
 #define _BORDER_TOP_		0
-#define _BORDER_BOTTOM_		_SCREEN_HEIGHT_+2
-
+#define _BORDER_BOTTOM_		30
+#define _SCREEN_WIDTH_		_BORDER_RIGHT_+2
+#define _SCREEN_HEIGHT_		_BORDER_BOTTOM_+2
 
 
 #include <stdio.h>
@@ -17,6 +15,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include <windows.h>
+
 
 typedef enum ScreenAlign
 {
@@ -99,28 +98,16 @@ typedef enum InputType
 } InputType;
 
 
-
-
 /* utility func of this game */
 void gotoxy(int x, int y);
 void printString(char* s, int x, int y);
 void clearScreen();
-
-
-
-
 /* game initialization func*/
 void initGame();
 void drawBorder();
-
-
-
-
 /* pure utility func */
 void setStringInfo(char* s, int* w, int* h);
 void fixEachLine(char* beginIdx, short* x);
-
-
 
 
 #endif

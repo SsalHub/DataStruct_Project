@@ -1,4 +1,4 @@
-#include "game_play_screen.h"
+#include "play_stage.h"
 
 void initStageScreen()
 {

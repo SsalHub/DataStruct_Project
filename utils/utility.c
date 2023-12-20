@@ -1,10 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "utility.h"
 
-
-
-
-
 /* utility func of this game */
 void gotoxy(int x, int y)
 {
@@ -80,10 +76,7 @@ void printString(char* s, int x, int y)
 	if (len <= 0) return;
 
 	width = height = 0;
-	/*ws = (wchar_t*)malloc(sizeof(wchar_t)*len + 1);
-	MultiByteToWideChar(CP_ACP, 0, s, len + 1, ws, MultiByteToWideChar(CP_ACP, 0, s, -1, NULL, NULL));*/
 	setStringInfo(s, &width, &height);
-	/*free(ws);*/
 	if (width % 2 != 0) width++;
 
 	/* Fix X Coordinate */
@@ -178,23 +171,28 @@ void clearScreen()
 	{
 		pos.Y = j;
 		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
-		for (i = 0; i < _SCREEN_WIDTH_; i++)
+		for (i = 0; i < _BORDER_RIGHT_; i++)
 		{
 			fprintf(stdout, " ");
 		}
 	}
 }
 
-
-
-
-
-
-
-
 /* game initialization func*/
 void initGame()
 {
+	SMALL_RECT window;
+	CONSOLE_CURSOR_INFO cursor;
+
+	window.Left = 0;
+	window.Top = 0;
+	window.Right = _SCREEN_WIDTH_;
+	window.Bottom = _SCREEN_HEIGHT_;
+	cursor.dwSize = 1;
+	cursor.bVisible = false;
+
+	SetConsoleWindowInfo(GetStdHandle(STD_OUTPUT_HANDLE), 1, &window);
+	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursor);
 	drawBorder();
 }
 
@@ -203,17 +201,17 @@ void drawBorder()
 	int i, j;
 
 	/* First Line*/
-	for (i = 0; i < _BORDER_RIGHT_; i++)
+	for (i = 0; i < _BORDER_RIGHT_ + 2; i++)
 	{
 		fprintf(stdout, "#");
 	}
 	fprintf(stdout, "\n");
 
 	/* Middle Line */
-	for (j = 0; j < _SCREEN_HEIGHT_; j++)
+	for (j = 0; j < _BORDER_BOTTOM_; j++)
 	{
 		fprintf(stdout, "#");
-		for (i = 0; i < _SCREEN_WIDTH_; i++)
+		for (i = 0; i < _BORDER_RIGHT_; i++)
 		{
 			fprintf(stdout, " ");
 		}
@@ -221,19 +219,12 @@ void drawBorder()
 	}
 
 	/* Last Line */
-	for (i = 0; i < _BORDER_RIGHT_; i++)
+	for (i = 0; i < _BORDER_RIGHT_ + 2; i++)
 	{
 		fprintf(stdout, "#");
 	}
 	fprintf(stdout, "\n");
 }
-
-
-
-
-
-
-
 
 /* pure utility func */
 void setStringInfo(char* s, int* w, int* h)
