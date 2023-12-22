@@ -168,6 +168,7 @@ void loadMapData(MapData* dest, int stageIndex)
 		}
 	}
 	memmove(dest->currMap, dest->originMap, _MAP_WIDTH_*_MAP_HEIGHT_*sizeof(GameObject));
+	fclose(fp);
 }
 
 void pushPlayerHistory(MapData* map, COORD pos)
