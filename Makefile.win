@@ -1,0 +1,46 @@
+# Project: \DataStructFinalProject
+# Makefile created by Embarcadero Dev-C++ 6.3
+
+CPP      = g++.exe -D__DEBUG__
+CC       = gcc.exe -D__DEBUG__
+WINDRES  = windres.exe
+OBJ      = Sources/BaseData.o Sources/ExceptionHandler.o Sources/Main.o Sources/MainMenu.o Sources/PlayStage.o Sources/ScreenRender.o Sources/UtilData.o
+LINKOBJ  = Sources/BaseData.o Sources/ExceptionHandler.o Sources/Main.o Sources/MainMenu.o Sources/PlayStage.o Sources/ScreenRender.o Sources/UtilData.o
+LIBS     = -L"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib" -L"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/lib" -static-libgcc -g3
+INCS     = -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include"
+CXXINCS  = -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include/c++"
+BIN      = DataStructFinalProject.exe
+CXXFLAGS = $(CXXINCS) -g3
+CFLAGS   = $(INCS) -g3
+DEL      = C:\Program Files (x86)\Embarcadero\Dev-Cpp\devcpp.exe INTERNAL_DEL
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${DEL} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CC) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+Sources/BaseData.o: Sources/BaseData.c
+	$(CC) -c Sources/BaseData.c -o Sources/BaseData.o $(CFLAGS)
+
+Sources/ExceptionHandler.o: Sources/ExceptionHandler.c
+	$(CC) -c Sources/ExceptionHandler.c -o Sources/ExceptionHandler.o $(CFLAGS)
+
+Sources/Main.o: Sources/Main.c
+	$(CC) -c Sources/Main.c -o Sources/Main.o $(CFLAGS)
+
+Sources/MainMenu.o: Sources/MainMenu.c
+	$(CC) -c Sources/MainMenu.c -o Sources/MainMenu.o $(CFLAGS)
+
+Sources/PlayStage.o: Sources/PlayStage.c
+	$(CC) -c Sources/PlayStage.c -o Sources/PlayStage.o $(CFLAGS)
+
+Sources/ScreenRender.o: Sources/ScreenRender.c
+	$(CC) -c Sources/ScreenRender.c -o Sources/ScreenRender.o $(CFLAGS)
+
+Sources/UtilData.o: Sources/UtilData.c
+	$(CC) -c Sources/UtilData.c -o Sources/UtilData.o $(CFLAGS)
